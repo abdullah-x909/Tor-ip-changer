@@ -46,6 +46,8 @@ cd Tor-ip-changer
 chmod +x setup.sh
 ./setup.sh
 ```
+then go to yor browser / system setting 
+>>network >> proxy >> manual >> SOC5 host = 127.0.0.1 >> port = 9051 >> save
 ---
 
 ## 🛠 How It Works
