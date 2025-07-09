@@ -20,77 +20,75 @@ It’s more secure than restarting the Tor service and avoids reusing circuits �
 
 ## ✨ Features
 
-- ✅ Fully automated installer: supports Debian, Ubuntu, Kali, Arch, Manjaro, Fedora
+- ✅ Fully automated installer for all tools
 - ✅ Sends secure `NEWNYM` signals without restarting Tor
-- ✅ Uses [Stem](https://stem.torproject.org/) — Tor’s official Python controller
 - ✅ Sets up cookie-based authentication (no password needed)
 - ✅ Prompts for user-defined IP change interval (e.g., every 5 minutes)
-- ✅ Optionally installs a persistent **systemd service** to run on startup
-- ✅ Shows current exit IP after each rotation
+- ✅ Installs a persistent **systemd service** to run on startup
 
 ---
-##✅ **Requirements**
+## Supported Distributions(tested)
 
-  -- Linux OS (Debian, Ubuntu, Kali, Arch, Manjaro, Fedora tested)
-
-  -- Python 3
-
-  -- Tor
-
-  -- pip (python3-pip)
+- Arch Linux / Manjaro
+- Debian / Ubuntu
+- Kali Linux
+- Parrot OS
+- Fedora
+- OpenSUSE
 
 
 ---
 ## 🚀 Quick Install
 
 ```
-git clone https://github.com/abdullah-x909/tor-ip-rotator.git
-cd tor-ip-rotator
-chmod +x tor-ip-rotator.sh
-./tor-ip-rotator.sh
+git clone https://github.com/abdullah-x909/Tor-ip-changer.git
+cd Tor-ip-changer
+chmod +x setup.sh
+./setup.sh
 ```
 ---
 
 ## 🛠 How It Works
 
-1. Installs tor and Python stem library (if missing)
+1. Install and setup Tor
 2. Configures Tor control port at 9051 with cookie authentication
 3. Adds your user to the correct group (debian-tor)
-4. Starts a background Python script that:
+4. Starts the script on system boot
 5. Authenticates to Tor via control port
-
-     -- Sends SIGNAL NEWNYM to request a new identity
-
-     -- Displays current exit IP
-
-     -- Sleeps and repeats after given interval
-
 ---
 
-##🔁 Manual Usage
 
-After initial setup, to manually rotate IPs:
+## Usage
 
-  `~/.tor-ip-rotator/rotate.py`
+Once installed, the service will automatically start and run in the background. Your IP address will be changed at the interval you specified during installation.
 
-To view exit IP at any time:
+### Checking Status
 
-  `tor-resolve www.google.com`
-
----
-
-##🔧 systemd Auto-Start (Optional)
-
-If you allow it, the installer creates a persistent background service:
-
-  `~/.config/systemd/user/tor-ip-rotator.service`
-
-Manage it with:
-
-```
-systemctl --user enable tor-ip-rotator
-systemctl --user start tor-ip-rotator
-systemctl --user stop tor-ip-rotator
+To check if the service is running:
+```bash
+systemctl status change-tor-ip.service
 ```
 
----
+## Uninstallation
+
+To remove the IP Changer:
+```bash
+sudo systemctl stop change-tor-ip.service
+sudo systemctl disable change-tor-ip.service
+sudo systemctl stop tor
+sudo systemctl disable tor
+sudo rm /etc/systemd/system/change-tor-ip.service
+sudo rm /home/$USER/change_tor_ip.sh
+```
+
+## Security Note
+
+This tool uses the Tor network to change your IP address. While Tor provides anonymity, please be aware that:
+- Some websites may block Tor exit nodes
+- Your connection speed may be affected
+- Always use HTTPS connections for sensitive data
+
+
+
+## Donate 
+for more repo Donate here [paypal](https://www.paypal.com/ncp/payment/7BPCFFBTG9QYY)
