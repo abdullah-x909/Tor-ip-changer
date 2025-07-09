@@ -1,14 +1,13 @@
 [Unit]
-Description=Change Tor IP Address every 300 seconds for user %i
+Description=Change Tor IP Address every 300 seconds
 After=network.target
 
 [Service]
 Type=simple
-User=%i
-ExecStart=/home/%i/change_tor_ip.sh
+User=root
+ExecStart=/root/change_tor_ip.sh
 Restart=always
 RestartSec=300
 
 [Install]
 WantedBy=multi-user.target
-
